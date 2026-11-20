@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>imToken Provider 与私有字段隔离测试</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">THIRD-PARTY DAPP · QA FIXTURE</p>
+      <h1>Provider 与私有字段隔离测试</h1>
+      <p class="intro">
+        本页面只检查能力是否存在，不读取或显示私有字段值，也不上传任何检测结果。
+      </p>
+
+      <section class="card" aria-labelledby="environment-title">
+        <div class="section-heading">
+          <h2 id="environment-title">环境检测</h2>
+          <button id="refresh" class="secondary" type="button">重新检测</button>
+        </div>
+        <dl class="checks">
+          <div>
+            <dt><code>window.ethereum.request</code></dt>
+            <dd id="provider-present" class="badge pending">检测中</dd>
+          </div>
+          <div>
+            <dt><code>window.imTokenAgent</code> 不存在</dt>
+            <dd id="agent-absent" class="badge pending">检测中</dd>
+          </div>
+          <div>
+            <dt><code>window.imToken.agent</code> 不存在</dt>
+            <dd id="nested-agent-absent" class="badge pending">检测中</dd>
+          </div>
+          <div>
+            <dt><code>window.imToken.deviceToken</code> 不存在</dt>
+            <dd id="device-token-absent" class="badge pending">检测中</dd>
+          </div>
+        </dl>
+        <p id="environment-summary" class="summary" aria-live="polite"></p>
+      </section>
+
+      <section class="card" aria-labelledby="provider-title">
+        <h2 id="provider-title">Provider 通信</h2>
+        <p>请使用无资金测试钱包。页面只记录成功/失败，不显示账户或签名内容。</p>
+        <div class="actions">
+          <button id="connect" class="primary" type="button">
+            1. 连接钱包
+          </button>
+          <button id="sign" class="primary" type="button" disabled>
+            2. 发起 personal_sign
+          </button>
+        </div>
+        <dl class="checks compact">
+          <div>
+            <dt><code>eth_requestAccounts</code></dt>
+            <dd id="connect-result" class="badge pending">未执行</dd>
+          </div>
+          <div>
+            <dt><code>personal_sign</code></dt>
+            <dd id="sign-result" class="badge pending">未执行</dd>
+          </div>
+        </dl>
+        <p id="provider-message" class="summary" aria-live="polite"></p>
+      </section>
+
+      <section class="card result-card" aria-labelledby="result-title">
+        <h2 id="result-title">验收结论</h2>
+        <p id="overall-result" class="overall pending" aria-live="polite">
+          等待完成连接与签名
+        </p>
+        <p class="hint">
+          通过条件：Provider 可连接并完成签名；三个 imToken 私有字段均不存在。
+        </p>
+      </section>
+
+      <footer>
+        <span id="origin"></span>
+        <span id="checked-at"></span>
+      </footer>
+    </main>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "name": "provider-isolation-test-dapp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --check app.js && node test.mjs"
+  }
+}
